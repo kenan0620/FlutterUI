@@ -35,7 +35,7 @@ class MyButton extends StatelessWidget {
     return new GestureDetector(
       onTap: () {
         final snackBar = new SnackBar(content: new Text('Tap'));
-        Scaffold.of(context).showSnackBar(snackBar);
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
       child: new Container(
         padding: new EdgeInsets.all(12),
@@ -55,7 +55,8 @@ class FlatButton extends StatelessWidget {
     // TODO: implement build
     return new InkWell(
       onTap:() {
-        Scaffold.of(context).showSnackBar(new SnackBar(content: new Text('Tap'),));
+        final snackBar = new SnackBar(content: new Text('Tap'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
       },
       child: new Container(
         padding: new EdgeInsets.all(12),
