@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'ImageShow.dart';
+import 'ListsShow.dart';
 
 void main() {
-  // runApp(new MyApp());
-
-  // runApp(new ImageLocalVC());
-  runApp(new ImageCacheVC());
-
-
+  runApp(new ListViewVC());
 }
