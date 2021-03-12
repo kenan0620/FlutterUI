@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ThemeColorAndFont.dart';
-
-import 'UIShow.dart';
+import 'ImageShow.dart';
 
 void main() {
   // runApp(new MyApp());

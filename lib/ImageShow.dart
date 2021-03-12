@@ -6,10 +6,10 @@ import 'package:transparent_image/transparent_image.dart';
 
 
 class ImageNetVC extends StatelessWidget {
-  @override 
+  @override
   Widget build(BuildContext context) {
     var title = 'Image Net Show';
-    
+
     return new MaterialApp(
       title: title,
       home: new Scaffold(
@@ -39,7 +39,7 @@ class ImageLocalVC extends StatelessWidget {
             new Center(child: new CircularProgressIndicator(),),
             new Center(
               child: new FadeInImage.memoryNetwork(
-                placeholder: kTransparentImage,
+                  placeholder: kTransparentImage,
                   image: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg'),
             )
           ],
