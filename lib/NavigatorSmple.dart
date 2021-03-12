@@ -44,3 +44,56 @@ class SecondVC extends StatelessWidget {
     );
   }
 }
+
+class Todo {
+  final String title;
+  final String description;
+
+  Todo(this.title,this.description);
+}
+
+class TodoListVC extends StatelessWidget {
+  final List<Todo> todos;
+
+  TodoListVC({Key key, this.todos}): super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    final title = '给新页面传值';
+    return new MaterialApp(
+      title: title,
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text(title),
+        ),
+        body: new ListView.builder(itemBuilder: (todo, index) {
+          return new ListTile(
+            title: new Text(todos[index].title),
+          );
+        },
+        itemCount: todos.length,),
+      ),
+    );
+  }
+}
+
+
+class DetailVC extends StatelessWidget {
+  final Todo todo;
+
+  DetailVC({Key key, @required this.todo}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    // Use the Todo to create our UI
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("${todo.title}"),
+      ),
+      body: new Padding(
+        padding: new EdgeInsets.all(16.0),
+        child: new Text('${todo.description}'),
+      ),
+    );
+  }
+}
