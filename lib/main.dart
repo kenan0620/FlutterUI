@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'ListsShow.dart';
+import 'Taps.dart';
 
 void main() {
-  runApp(new GridListVC());
+  runApp(new TapVC());
 }
