@@ -81,6 +81,30 @@ class ListRowViewVC extends StatelessWidget {
         ),
       ),
     );
+  }
+}
 
+class ListLongViewVC extends StatelessWidget {
+  final List<String> items;
+  ListLongViewVC({Key,key,
+  @required this.items
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final title = '长列表';
+    return new MaterialApp(
+      title: title,
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text(title),
+        ),
+        body: new ListView.builder(itemCount: items.length,itemBuilder: (context, index) {
+          return new ListTile(
+            title: new Text('数据源 ${items[index]} 来了'),
+          );
+        }),
+      ),
+    );
   }
 }
