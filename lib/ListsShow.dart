@@ -128,13 +128,15 @@ class ListWorkVC extends StatelessWidget {
           if (item is HeadingItem) {
             return new ListTile(
               title: new Text(item.heading,
-              style: Theme.of(context).textTheme.headline,),
+              style: Theme.of(context).textTheme.headline5,),
             );
           }else if (item is MessageItem) {
             return new ListTile(
               title: new Text(item.sender),
               subtitle: new Text(item.body),
             );
+          }else {
+            return new ListTile();
           }
         }, itemCount: items.length,),
       ),
@@ -154,4 +156,30 @@ class MessageItem implements ListItem {
   final String body;
 
   MessageItem(this.sender, this.body);
+}
+
+class GridListVC extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    final title = 'Grid List';
+    
+    return new MaterialApp(
+      title: title,
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text(title),
+        ),
+        body: new GridView.count(
+          crossAxisCount: 2,
+        children: new List.generate(100, (index) {
+            return new Center(
+            child: new Text('Item $index',
+    style: Theme.of(context).textTheme.headline5,),
+            );
+        },),
+      ),
+    )
+    );
+  }
 }
