@@ -3,5 +3,12 @@ import 'package:flutter/material.dart';
 import 'ListsShow.dart';
 
 void main() {
-  runApp(new ListLongViewVC(items: new List<String>.generate(10000, (index) => "Item $index")));
+  runApp(new ListWorkVC(
+    items: new List<ListItem>.generate(
+      1000,
+          (i) => i % 6 == 0
+          ? new HeadingItem("Heading $i")
+          : new MessageItem("Sender $i", "Message body $i"),
+    ),
+  ));
 }
