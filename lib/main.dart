@@ -7,6 +7,8 @@ import 'UIShow.dart';
 void main() {
   // runApp(new MyApp());
 
-  runApp(new ImageVC());
+  // runApp(new ImageLocalVC());
+  runApp(new ImageCacheVC());
+
 
 }
