@@ -34,7 +34,8 @@ dependencies:
   transparent_image: ^1.0.0
   #网络请求
   dio: ^3.0.10
-
+  #长链接web_socket
+  web_socket_channel: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
