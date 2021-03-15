@@ -67,9 +67,15 @@ class TodoListVC extends StatelessWidget {
         appBar: new AppBar(
           title: new Text(title),
         ),
-        body: new ListView.builder(itemBuilder: (todo, index) {
+        body: new ListView.builder(itemBuilder: (context, index) {
           return new ListTile(
             title: new Text(todos[index].title),
+            onTap: () {
+              Navigator.push(context, new MaterialPageRoute(
+                builder: (context) => new DetailVC(todo: todos[index]),
+              )
+              );
+            },
           );
         },
         itemCount: todos.length,),
@@ -92,7 +98,9 @@ class DetailVC extends StatelessWidget {
       ),
       body: new Padding(
         padding: new EdgeInsets.all(16.0),
-        child: new Text('${todo.description}'),
+        child: new Center(
+          child: new Text('传过来的内容是：${todo.title}'),
+        ),
       ),
     );
   }
