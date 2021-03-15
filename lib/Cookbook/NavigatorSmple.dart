@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class Nav extends StatelessWidget {
@@ -12,17 +11,22 @@ class Nav extends StatelessWidget {
 }
 
 class FirstVC extends StatelessWidget {
-  @override 
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('FirstVC'),
       ),
       body: new Center(
-        child: new ElevatedButton(onPressed: () {
-          // Navigate to second screen when tapped!
-          Navigator.push(context, new MaterialPageRoute(builder: (context) => new SecondVC()),);
-        }, child: new Text('Launch new screen')),
+        child: new ElevatedButton(
+            onPressed: () {
+              // Navigate to second screen when tapped!
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new SecondVC()),
+              );
+            },
+            child: new Text('Launch new screen')),
       ),
     );
   }
@@ -36,10 +40,12 @@ class SecondVC extends StatelessWidget {
         title: new Text('SecondVC'),
       ),
       body: new Center(
-        child: new ElevatedButton(onPressed: () {
-          // Navigate back to First screen when tapped!
-          Navigator.pop(context);
-        }, child: new Text('go back')),
+        child: new ElevatedButton(
+            onPressed: () {
+              // Navigate back to First screen when tapped!
+              Navigator.pop(context);
+            },
+            child: new Text('go back')),
       ),
     );
   }
@@ -49,13 +55,13 @@ class Todo {
   final String title;
   final String description;
 
-  Todo(this.title,this.description);
+  Todo(this.title, this.description);
 }
 
 class TodoListVC extends StatelessWidget {
   final List<Todo> todos;
 
-  TodoListVC({Key key, this.todos}): super(key: key);
+  TodoListVC({Key key, this.todos}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -66,23 +72,25 @@ class TodoListVC extends StatelessWidget {
         appBar: new AppBar(
           title: new Text(title),
         ),
-        body: new ListView.builder(itemBuilder: (context, index) {
-          return new ListTile(
-            title: new Text(todos[index].title),
-            onTap: () {
-              Navigator.push(context, new MaterialPageRoute(
-                builder: (context) => new DetailVC(todo: todos[index]),
-              )
-              );
-            },
-          );
-        },
-        itemCount: todos.length,),
+        body: new ListView.builder(
+          itemBuilder: (context, index) {
+            return new ListTile(
+              title: new Text(todos[index].title),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                      builder: (context) => new DetailVC(todo: todos[index]),
+                    ));
+              },
+            );
+          },
+          itemCount: todos.length,
+        ),
       ),
     );
   }
 }
-
 
 class DetailVC extends StatelessWidget {
   final Todo todo;
@@ -119,17 +127,22 @@ class HomePageVC extends StatelessWidget {
 }
 
 class SelectButton extends StatelessWidget {
-  @override 
+  @override
   Widget build(BuildContext context) {
-    return new ElevatedButton(onPressed: () {
-      _navigationAndDisplaySelection(context);
-    }, child: new Text('Pick an option, any option!'));
+    return new ElevatedButton(
+        onPressed: () {
+          _navigationAndDisplaySelection(context);
+        },
+        child: new Text('Pick an option, any option!'));
   }
 
   _navigationAndDisplaySelection(BuildContext context) async {
     final result = await Navigator.push(
-        context, new MaterialPageRoute(builder: (context) => new SelectVC()),);
-    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: new Text('$result')));
+      context,
+      new MaterialPageRoute(builder: (context) => new SelectVC()),
+    );
+    ScaffoldMessenger.of(context)
+        .showSnackBar(new SnackBar(content: new Text('$result')));
   }
 }
 
@@ -145,16 +158,21 @@ class SelectVC extends StatelessWidget {
         child: new Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new Padding(padding: const EdgeInsets.all(8),
-              child: new ElevatedButton(onPressed: () {
-                Navigator.pop(context,'Yep!');
-              }, child: new Text('Yep!')
-              ),
+            new Padding(
+              padding: const EdgeInsets.all(8),
+              child: new ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'Yep!');
+                  },
+                  child: new Text('Yep!')),
             ),
-            new Padding(padding: const EdgeInsets.all(8),
-              child: new ElevatedButton(onPressed: (){
-                Navigator.pop(context, 'Nope.');
-              }, child: new Text('Nope')),
+            new Padding(
+              padding: const EdgeInsets.all(8),
+              child: new ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'Nope.');
+                  },
+                  child: new Text('Nope')),
             )
           ],
         ),

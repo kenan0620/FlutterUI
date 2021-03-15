@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'Cookbook/Network.dart';
+import 'UISample/UISample.dart';
 
 void main() {
-  runApp(new WebsocketApp());
+  runApp(new UISampleApp());
 }

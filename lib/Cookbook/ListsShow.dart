@@ -1,9 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ListViewVC extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     final title = 'ListView Show';
@@ -37,7 +35,6 @@ class ListViewVC extends StatelessWidget {
 
 class ListRowViewVC extends StatelessWidget {
   @override
-
   Widget build(BuildContext context) {
     final title = '水平list';
     return new MaterialApp(
@@ -47,10 +44,10 @@ class ListRowViewVC extends StatelessWidget {
           title: new Text(title),
         ),
         body: new Container(
-          margin: new EdgeInsets.symmetric(vertical: 20,horizontal: 20),
+          margin: new EdgeInsets.symmetric(vertical: 20, horizontal: 20),
           height: 200,
           child: new ListView(
-          scrollDirection: Axis.horizontal,
+            scrollDirection: Axis.horizontal,
             children: <Widget>[
               new Container(
                 width: 160,
@@ -86,9 +83,7 @@ class ListRowViewVC extends StatelessWidget {
 
 class ListLongViewVC extends StatelessWidget {
   final List<String> items;
-  ListLongViewVC({Key,key,
-  @required this.items
-  }) : super(key: key);
+  ListLongViewVC({Key, key, @required this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -99,11 +94,13 @@ class ListLongViewVC extends StatelessWidget {
         appBar: new AppBar(
           title: new Text(title),
         ),
-        body: new ListView.builder(itemCount: items.length,itemBuilder: (context, index) {
-          return new ListTile(
-            title: new Text('数据源 ${items[index]} 来了'),
-          );
-        }),
+        body: new ListView.builder(
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return new ListTile(
+                title: new Text('数据源 ${items[index]} 来了'),
+              );
+            }),
       ),
     );
   }
@@ -111,7 +108,7 @@ class ListLongViewVC extends StatelessWidget {
 
 class ListWorkVC extends StatelessWidget {
   final List<ListItem> items;
-  ListWorkVC({Key,key, @required this.items}) : super(key: key);
+  ListWorkVC({Key, key, @required this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -123,22 +120,27 @@ class ListWorkVC extends StatelessWidget {
         appBar: new AppBar(
           title: new Text(title),
         ),
-        body: new ListView.builder(itemBuilder: (context, index){
-          final item = items[index];
-          if (item is HeadingItem) {
-            return new ListTile(
-              title: new Text(item.heading,
-              style: Theme.of(context).textTheme.headline5,),
-            );
-          }else if (item is MessageItem) {
-            return new ListTile(
-              title: new Text(item.sender),
-              subtitle: new Text(item.body),
-            );
-          }else {
-            return new ListTile();
-          }
-        }, itemCount: items.length,),
+        body: new ListView.builder(
+          itemBuilder: (context, index) {
+            final item = items[index];
+            if (item is HeadingItem) {
+              return new ListTile(
+                title: new Text(
+                  item.heading,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+              );
+            } else if (item is MessageItem) {
+              return new ListTile(
+                title: new Text(item.sender),
+                subtitle: new Text(item.body),
+              );
+            } else {
+              return new ListTile();
+            }
+          },
+          itemCount: items.length,
+        ),
       ),
     );
   }
@@ -163,23 +165,27 @@ class GridListVC extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     final title = 'Grid List';
-    
+
     return new MaterialApp(
-      title: title,
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text(title),
-        ),
-        body: new GridView.count(
-          crossAxisCount: 2,
-        children: new List.generate(100, (index) {
-            return new Center(
-            child: new Text('Item $index',
-    style: Theme.of(context).textTheme.headline5,),
-            );
-        },),
-      ),
-    )
-    );
+        title: title,
+        home: new Scaffold(
+          appBar: new AppBar(
+            title: new Text(title),
+          ),
+          body: new GridView.count(
+            crossAxisCount: 2,
+            children: new List.generate(
+              100,
+              (index) {
+                return new Center(
+                  child: new Text(
+                    'Item $index',
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                );
+              },
+            ),
+          ),
+        ));
   }
 }
