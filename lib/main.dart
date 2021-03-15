@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'NavigatorSmple.dart';
+import 'Network.dart';
 
 void main() {
-  runApp(new MaterialApp(
-    title: 'Returning Data',
-    home: HomePageVC(),
-  ));
+  runApp(new NetworkVC());
 }
