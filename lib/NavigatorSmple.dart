@@ -59,7 +59,6 @@ class TodoListVC extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     final title = '给新页面传值';
     return new MaterialApp(
       title: title,
@@ -91,7 +90,6 @@ class DetailVC extends StatelessWidget {
   DetailVC({Key key, @required this.todo}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // Use the Todo to create our UI
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("${todo.title}"),
@@ -100,6 +98,65 @@ class DetailVC extends StatelessWidget {
         padding: new EdgeInsets.all(16.0),
         child: new Center(
           child: new Text('传过来的内容是：${todo.title}'),
+        ),
+      ),
+    );
+  }
+}
+
+class HomePageVC extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Return Data Demo'),
+      ),
+      body: new Center(
+        child: new SelectButton(),
+      ),
+    );
+  }
+}
+
+class SelectButton extends StatelessWidget {
+  @override 
+  Widget build(BuildContext context) {
+    return new ElevatedButton(onPressed: () {
+      _navigationAndDisplaySelection(context);
+    }, child: new Text('Pick an option, any option!'));
+  }
+
+  _navigationAndDisplaySelection(BuildContext context) async {
+    final result = await Navigator.push(
+        context, new MaterialPageRoute(builder: (context) => new SelectVC()),);
+    ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: new Text('$result')));
+  }
+}
+
+class SelectVC extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Pick an option'),
+      ),
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new Padding(padding: const EdgeInsets.all(8),
+              child: new ElevatedButton(onPressed: () {
+                Navigator.pop(context,'Yep!');
+              }, child: new Text('Yep!')
+              ),
+            ),
+            new Padding(padding: const EdgeInsets.all(8),
+              child: new ElevatedButton(onPressed: (){
+                Navigator.pop(context, 'Nope.');
+              }, child: new Text('Nope')),
+            )
+          ],
         ),
       ),
     );
