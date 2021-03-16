@@ -6,12 +6,12 @@ class OftenUIApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: '常用控件',
-      home: new OftenVC(),
+      home: new ListVC(),
     );
   }
 }
 
-class OftenVC extends StatelessWidget {
+class GridVC extends StatelessWidget {
   @override 
   Widget build(BuildContext context) {
     
@@ -35,6 +35,97 @@ class OftenVC extends StatelessWidget {
       ),
       body: new Center(
         child: buildGrid(),
+      ),
+    );
+  }
+}
+
+class ListVC extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> list = <Widget>[
+      new ListTile(
+        title: new Text('CineArts at the Empire',
+        style: new TextStyle(
+          fontWeight: FontWeight.w500,
+          fontSize: 20
+        ),),
+        subtitle: new Text('85 W Prtal Ave'),
+        leading: new Icon(
+          Icons.theaters,
+          color: Colors.blue[500],
+        ),
+      ),
+      new ListTile(
+        title: new Text('The Castro Theater',
+          style: new TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),),
+        subtitle: new Text('429 Castro St'),
+        leading: new Icon(
+          Icons.theaters,
+          color: Colors.blue[500],
+        ),
+      ),
+      new ListTile(
+        title: new Text('CineArts at the Empire',
+          style: new TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 20
+          ),),
+        subtitle: new Text('85 W Prtal Ave'),
+        leading: new Icon(
+          Icons.theaters,
+          color: Colors.blue[500],
+        ),
+      ),
+      new ListTile(
+        title: new Text('The Castro Theater',
+          style: new TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),),
+        subtitle: new Text('429 Castro St'),
+        leading: new Icon(
+          Icons.theaters,
+          color: Colors.blue[500],
+        ),
+      ),
+      new ListTile(
+        title: new Text('CineArts at the Empire',
+          style: new TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 20
+          ),),
+        subtitle: new Text('85 W Prtal Ave'),
+        leading: new Icon(
+          Icons.theaters,
+          color: Colors.blue[500],
+        ),
+      ),
+      new ListTile(
+        title: new Text('The Castro Theater',
+          style: new TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 20,
+          ),),
+        subtitle: new Text('429 Castro St'),
+        leading: new Icon(
+          Icons.theaters,
+          color: Colors.blue[500],
+        ),
+      ),
+    ];
+
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('常用控件示例'),
+      ),
+      body: new Center(
+        child: new ListView(
+          children: list,
+        ),
       ),
     );
   }
