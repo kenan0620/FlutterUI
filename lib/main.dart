@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'UISample/UISample.dart';
+import 'UISample/OftenUI.dart';
 
 void main() {
-  runApp(new UISampleApp());
+  runApp(new OftenUIApp());
 }
