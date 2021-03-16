@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutterui/main.dart';
 
-import 'package:flutterui/ImageShow.dart';
+import 'package:flutterui/Cookbook/ImageShow.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
