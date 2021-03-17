@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'UISample/EventSample.dart';
+import 'FlutterForIOS.dart';
 
 void main() {
-  runApp(new TaboxApp());
+  runApp(new FluterIOSAPP());
 }
