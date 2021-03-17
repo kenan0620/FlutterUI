@@ -226,7 +226,7 @@ class TaboxApp extends StatelessWidget {
       title: 'Tapbox Demo',
       home: new Scaffold(
         appBar: new AppBar(
-          title: new Text('TapboxB Demo'),
+          title: new Text('TapboxC Demo'),
         ),
         body: new Center(
           child: new ParentWidget(),
@@ -250,8 +250,8 @@ class _ParentWidgetState extends State<ParentWidget> {
   @override
   Widget build(BuildContext context){
     return new Container(
-      child: new TapboxB(onChanged: _handleTapboxChanged,
-        active: _active,),
+      child: new TapboxC(onChanged: _handleTapboxChanged,
+      active: _active,),
     );
   }
 }
@@ -278,6 +278,61 @@ class TapboxB extends StatelessWidget {
         height: 200,
         decoration: new BoxDecoration(
           color: active? Colors.lightGreen[700] : Colors.grey[600],
+        ),
+      ),
+    );
+  }
+}
+
+class TapboxC extends StatefulWidget {
+  final bool active;
+  final ValueChanged<bool> onChanged;
+
+  TapboxC({Key key,this.active,@required this.onChanged}) : super(key: key);
+
+  _TapboxCState createState() => new _TapboxCState();
+}
+
+class _TapboxCState extends State<TapboxC> {
+  bool _highlight = false;
+  void _handleTapDown(TapDownDetails details) {
+    setState(() {
+      _highlight = true;
+    });
+  }
+  
+  void _handleTapUp(TapUpDetails details) {
+    setState(() {
+      _highlight = false;
+    });
+  }
+
+  void _handleTapCancel() {
+    setState(() {
+      _highlight = false;
+    });
+  }
+
+  void _handleTap() {
+    widget.onChanged(!widget.active);
+  }
+
+  Widget build(BuildContext context) {
+    return new GestureDetector(
+      onTapDown: _handleTapDown,
+      onTapUp: _handleTapUp,
+      onTap: _handleTap,
+      onTapCancel: _handleTapCancel,
+      child: new Container(
+        child: new Center(
+          child: new Text(widget.active? 'Active' : 'Inactive',
+          style: new TextStyle(fontSize: 32,color: Colors.white),),
+        ),
+        width: 200,
+        height: 200,
+        decoration: new BoxDecoration(
+          color: widget.active? Colors.lightGreen[700] : Colors.grey[600],
+          border: _highlight? new Border.all(color: Colors.teal[700],width: 10) : null,
         ),
       ),
     );
