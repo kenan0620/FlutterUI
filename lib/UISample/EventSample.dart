@@ -180,3 +180,106 @@ Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese Alps. Situate
     );
   }
 }
+
+class TapboxA extends StatefulWidget {
+  TapboxA({Key key}) : super(key: key);
+
+  @override
+  _TapoxAState createState() => new _TapoxAState();
+}
+
+class _TapoxAState extends State<TapboxA> {
+  bool _active = false;
+
+  void _handeTap() {
+    setState(() {
+      _active = !_active;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new GestureDetector(
+      onTap: _handeTap,
+      child: new Container(
+        child: new Center(
+          child: new Text(_active? 'Active' : 'Inactive',
+          style: new TextStyle(
+            fontSize: 32,
+            color: Colors.white,
+          ),),
+        ),
+        width:200,
+        height: 200,
+        decoration: new BoxDecoration(
+          color: _active ? Colors.lightGreen[700] : Colors.grey[600],
+        ),
+      ),
+    );
+  }
+}
+
+class TaboxApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      title: 'Tapbox Demo',
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('TapboxB Demo'),
+        ),
+        body: new Center(
+          child: new ParentWidget(),
+        ),
+      ),
+    );
+  }
+}
+
+class ParentWidget extends StatefulWidget {
+  @override
+  _ParentWidgetState createState() => new _ParentWidgetState();
+}
+class _ParentWidgetState extends State<ParentWidget> {
+  bool _active = false;
+  void _handleTapboxChanged(bool newValue) {
+    setState(() {
+      _active = newValue;
+    });
+  }
+  @override
+  Widget build(BuildContext context){
+    return new Container(
+      child: new TapboxB(onChanged: _handleTapboxChanged,
+        active: _active,),
+    );
+  }
+}
+
+class TapboxB extends StatelessWidget {
+  final bool active;
+  final ValueChanged<bool> onChanged;
+
+  TapboxB({Key key, this.active: false, @required this.onChanged}): super(key: key);
+
+  void _handleTap() {
+    onChanged(!active);
+  }
+
+  Widget build(BuildContext context) {
+    return new GestureDetector(
+      onTap: _handleTap,
+      child: new Container(
+        child: new Center(
+          child: new Text(active? 'Active':'Inactive',
+          style: new TextStyle(fontSize: 32,color: Colors.white),),
+        ),
+        width: 200,
+        height: 200,
+        decoration: new BoxDecoration(
+          color: active? Colors.lightGreen[700] : Colors.grey[600],
+        ),
+      ),
+    );
+  }
+}
