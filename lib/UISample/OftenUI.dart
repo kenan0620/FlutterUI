@@ -7,7 +7,7 @@ class OftenUIApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: '常用控件',
-      home: new CardVC(),
+      home: new ListTileVC(),
     );
   }
 }
@@ -215,6 +215,28 @@ class CardVC extends StatelessWidget {
           title: new Text('Card Demo'),
         ),
         body: card,
+      ),
+    );
+  }
+}
+
+class ListTileVC extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+    return new MaterialApp(
+      title: 'ListTile Demo',
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('ListTile Demo'),
+        ),
+        body: new ListTile(
+          title: new Text('ListTile',
+          style: new TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 50
+          ),),
+        ),
       ),
     );
   }
