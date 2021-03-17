@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterui/UISample/UIAdapt.dart';
 
 class OftenUIApp extends StatelessWidget{
   @override
@@ -6,7 +7,7 @@ class OftenUIApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: '常用控件',
-      home: new ListVC(),
+      home: new StackVC(),
     );
   }
 }
@@ -130,3 +131,38 @@ class ListVC extends StatelessWidget {
     );
   }
 }
+
+class StackVC extends StatelessWidget{
+  @override
+  Widget build(BuildContext context) {
+
+    var stack = new Stack(
+      alignment: const Alignment(0.6, 0.6),
+      children: [
+        new CircleAvatar(
+          backgroundImage: new AssetImage('Image/11.jpeg'),
+          radius: Adapt.screenWidth()/6,
+        ),
+        new Container(
+          decoration: new BoxDecoration(
+            color: Colors.black45,
+          ),
+          child: new Text('Mia B',
+          style: new TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),),
+        )
+      ],
+    );
+
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('常用控件示例'),
+      ),
+      body: stack,
+    );
+  }
+}
+
