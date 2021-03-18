@@ -8,7 +8,12 @@ class FluterIOSAPP extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter For IOS',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: Animation(),
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('绘图'),
+        ),
+        body: DrawPicture(),
+      ),
     );
   }
 }
@@ -142,5 +147,46 @@ class _AnimationState extends State<Animation> with TickerProviderStateMixin {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+}
+
+class SignaturePainter extends CustomPainter {
+  final List<Offset> points;
+
+  SignaturePainter(this.points);
+
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.black;
+    paint.strokeCap = StrokeCap.round;
+    paint.strokeWidth = 5;
+    for (int i = 0; i < points.length - 1;  i++) {
+      if (points[i] != null && points[i + 1] != null) {
+        canvas.drawLine(points[i], points[i + 1], paint);
+      }
+    }
+  }
+  bool shouldRepaint(SignaturePainter other) => other.points != points;
+}
+
+class DrawPicture extends StatefulWidget {
+  _DrawPictureState createState() => new _DrawPictureState();
+}
+
+class _DrawPictureState extends State <DrawPicture> {
+  List<Offset> _points = <Offset>[];
+
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onPanUpdate: (DragUpdateDetails details) {
+        setState(() {
+          RenderBox refereceBox = context.findRenderObject();
+          Offset localPosition = refereceBox.globalToLocal(details.globalPosition);
+          _points = List.from(_points)..add(localPosition);
+        });
+      },
+      onPanEnd: (DragEndDetails details)  => _points.add(null),
+      child: CustomPaint(painter: SignaturePainter(_points),size: Size.infinite,),
+    );
   }
 }
