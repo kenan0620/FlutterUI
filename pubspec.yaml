@@ -33,11 +33,22 @@ dependencies:
   #  用占位符淡入图片
   transparent_image: ^1.0.0
   #网络请求
-  dio: ^3.0.10
+  dio: ^4.0.0-prev1
   #长链接web_socket
   web_socket_channel: ^2.0.0
   #跳转到其他 App
   url_launcher: ^6.0.2
+  #定位
+  location: ^4.1.1
+
+#推送暂定，还未导入
+flutter_bl_umpush: ^0.0.8
+
+flutter_umpush: ^0.0.3
+
+#模型转换
+json_serializable: ^4.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -17,7 +17,9 @@ class FirstVC extends StatelessWidget {
       appBar: new AppBar(
         title: new Text('FirstVC'),
       ),
-      body: new Center(
+      body: new Container(
+        padding: EdgeInsets.only(left: 50,top: 50,right: 50,bottom: 50),
+        color: Colors.yellow,
         child: new ElevatedButton(
             onPressed: () {
               // Navigate to second screen when tapped!
@@ -27,6 +29,8 @@ class FirstVC extends StatelessWidget {
               );
             },
             child: new Text('Launch new screen')),
+        width: 200,
+          height: 200,
       ),
     );
   }
