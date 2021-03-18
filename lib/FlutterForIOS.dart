@@ -1,19 +1,18 @@
+import 'dart:convert';
+import 'dart:isolate';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:http/http.dart' as http;
 class FluterIOSAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter For IOS',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('绘图'),
-        ),
-        body: CustomButton('label'),
-      ),
+      home: new NetworkVC(),
     );
   }
 }
@@ -198,6 +197,87 @@ class CustomButton extends StatelessWidget {
   
   @override 
   Widget build(BuildContext context) {
-    return Opacity(opacity: 0.5, child: ElevatedButton(onPressed: () {}, child: Text(label)),) ;
+    return Opacity(opacity: 0.5, child: ElevatedButton(onPressed: () async {
+
+    }, child: Text(label)),) ;
+  }
+}
+
+class NetworkVC extends StatefulWidget {
+  NetworkVC({Key key}) : super(key: key);
+  _NetworkVCState createState() => new _NetworkVCState();
+}
+
+class _NetworkVCState extends State<NetworkVC> {
+  List widgets = [];
+  @override
+  void initState() {
+    super.initState();
+    loadData1();
+  }
+  
+  @override 
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('网络请求'),
+      ),
+      body: ListView.builder(itemBuilder: (BuildContext context, int position){
+        return getRow(position);
+      },
+      itemCount: widgets.length,),
+    );
+  }
+
+  Widget getRow(int i) {
+    return Padding(padding: EdgeInsets.all(10),
+    child: Text("Row ${widgets[i]["title"]}"),);
+  }
+
+  loadData() async {
+    String url = "https://jsonplaceholder.typicode.com/posts";
+    http.Response  response  = await http.get(url);
+    setState(() {
+      // widgets = json.decoder(response.body);
+    });
+  }
+
+  loadData1() async {
+    ReceivePort receivePort = ReceivePort();
+    await Isolate.spawn(dataLoader, receivePort.sendPort);
+
+    // The 'echo' isolate sends its SendPort as the first message
+    SendPort sendPort = await receivePort.first;
+
+    List msg = await sendReceive(sendPort, "https://jsonplaceholder.typicode.com/posts");
+
+    setState(() {
+      widgets = msg;
+    });
+  }
+
+// The entry point for the isolate
+  static dataLoader(SendPort sendPort) async {
+    // Open the ReceivePort for incoming messages.
+    ReceivePort port = ReceivePort();
+
+    // Notify any other isolates what port this isolate listens to.
+    sendPort.send(port.sendPort);
+
+    await for (var msg in port) {
+      String data = msg[0];
+      SendPort replyTo = msg[1];
+
+      String dataURL = data;
+      http.Response response = await http.get(dataURL);
+      // Lots of JSON to parse
+      replyTo.send(json.decode(response.body));
+    }
+  }
+
+  Future sendReceive(SendPort port, msg) {
+    ReceivePort response = ReceivePort();
+    port.send([msg, response.sendPort]);
+    return response.first;
   }
 }
