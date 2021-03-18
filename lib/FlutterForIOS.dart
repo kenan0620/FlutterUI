@@ -2,18 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class FluterIOSAPP extends StatelessWidget{
+class FluterIOSAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter For IOS',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: WidgetManager(),
+      home: Animation(),
     );
   }
 }
 
-class UpdateWidgetVC extends StatefulWidget{
+class UpdateWidgetVC extends StatefulWidget {
   UpdateWidgetVC({Key key}) : super(key: key);
 
   _UpdateWidgetVCState createState() => new _UpdateWidgetVCState();
@@ -21,10 +21,10 @@ class UpdateWidgetVC extends StatefulWidget{
 
 class _UpdateWidgetVCState extends State<UpdateWidgetVC> {
   String textToShow = 'I Like Flutter';
-int count = 1;
+  int count = 1;
   void request() {
     setState(() {
-      count ++;
+      count++;
       textToShow = 'Flutter is Awesome $count';
     });
   }
@@ -37,27 +37,27 @@ int count = 1;
       ),
       body: Center(
         child: CupertinoButton(
-          onPressed: (){
-
-          },
+          onPressed: () {},
           child: Text('hello'),
           color: Colors.yellow,
-          padding: EdgeInsets.only(left: 40,right: 10),
+          padding: EdgeInsets.only(left: 40, right: 10),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: request,
-      tooltip: 'Update Data',
-      child: new Icon(Icons.update),),
+      floatingActionButton: FloatingActionButton(
+        onPressed: request,
+        tooltip: 'Update Data',
+        child: new Icon(Icons.update),
+      ),
     );
   }
 }
 
 class WidgetManager extends StatefulWidget {
-  WidgetManager({Key key}): super(key: key);
+  WidgetManager({Key key}) : super(key: key);
   _WidgetManagerState createState() => new _WidgetManagerState();
 }
 
-class _WidgetManagerState extends State<WidgetManager>{
+class _WidgetManagerState extends State<WidgetManager> {
   bool toggle = true;
   void _toggle() {
     setState(() {
@@ -68,10 +68,12 @@ class _WidgetManagerState extends State<WidgetManager>{
   _getToggleChild() {
     if (toggle) {
       return Text('Toggle One');
-    }else {
-      return CupertinoButton(child: Text('Toggle Two'), onPressed: (){
-        print("第二个来了");
-      });
+    } else {
+      return CupertinoButton(
+          child: Text('Toggle Two'),
+          onPressed: () {
+            print("第二个来了");
+          });
     }
   }
 
@@ -90,5 +92,55 @@ class _WidgetManagerState extends State<WidgetManager>{
         child: Icon(Icons.update),
       ),
     );
+  }
+}
+
+class Animation extends StatefulWidget {
+  Animation({Key key}) : super(key: key);
+
+  _AnimationState createState() => new _AnimationState();
+}
+
+class _AnimationState extends State<Animation> with TickerProviderStateMixin {
+  AnimationController controller;
+  CurvedAnimation curvedAnimation;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 2000));
+    curvedAnimation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text('动画'),
+      ),
+      body: Center(
+        child: Container(
+          child: FadeTransition(
+            opacity: curvedAnimation,
+            child: FlutterLogo(
+              size: 100,
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        tooltip: 'Fade',
+        child: Icon(Icons.brush),
+        onPressed: () {
+          controller.forward();
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }
