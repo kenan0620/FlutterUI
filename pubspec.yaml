@@ -36,6 +36,8 @@ dependencies:
   dio: ^3.0.10
   #长链接web_socket
   web_socket_channel: ^2.0.0
+  #跳转到其他 App
+  url_launcher: ^6.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
