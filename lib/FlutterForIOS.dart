@@ -12,7 +12,7 @@ class FluterIOSAPP extends StatelessWidget {
         appBar: new AppBar(
           title: new Text('绘图'),
         ),
-        body: DrawPicture(),
+        body: CustomButton('label'),
       ),
     );
   }
@@ -188,5 +188,16 @@ class _DrawPictureState extends State <DrawPicture> {
       onPanEnd: (DragEndDetails details)  => _points.add(null),
       child: CustomPaint(painter: SignaturePainter(_points),size: Size.infinite,),
     );
+  }
+}
+class CustomButton extends StatelessWidget {
+  final String label;
+  double _opacity = 1.0;
+
+  CustomButton(this.label);
+  
+  @override 
+  Widget build(BuildContext context) {
+    return Opacity(opacity: 0.5, child: ElevatedButton(onPressed: () {}, child: Text(label)),) ;
   }
 }
