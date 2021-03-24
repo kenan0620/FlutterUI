@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'FlutterForIOS.dart';
+import 'UISample/DialogSample.dart';
 
 void main() {
-  runApp(new FluterIOSAPP());
+  runApp(new MaterialApp(
+    title: 'title',
+    home: Khfh(),
+  ));
 }

@@ -7,7 +7,7 @@ class OftenUIApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return new MaterialApp(
       title: '常用控件',
-      home: new GridVC(),
+      home: new StackVC(),
     );
   }
 }

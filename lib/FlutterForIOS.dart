@@ -13,7 +13,7 @@ class FluterIOSAPP extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter For IOS',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: new NetworkVC(),
+      home: new UpdateWidgetVC(),
     );
   }
 }
@@ -160,12 +160,13 @@ class SignaturePainter extends CustomPainter {
     paint.color = Colors.black;
     paint.strokeCap = StrokeCap.round;
     paint.strokeWidth = 5;
-    for (int i = 0; i < points.length - 1;  i++) {
+    for (int i = 0; i < points.length - 1; i++) {
       if (points[i] != null && points[i + 1] != null) {
         canvas.drawLine(points[i], points[i + 1], paint);
       }
     }
   }
+
   bool shouldRepaint(SignaturePainter other) => other.points != points;
 }
 
@@ -173,7 +174,7 @@ class DrawPicture extends StatefulWidget {
   _DrawPictureState createState() => new _DrawPictureState();
 }
 
-class _DrawPictureState extends State <DrawPicture> {
+class _DrawPictureState extends State<DrawPicture> {
   List<Offset> _points = <Offset>[];
 
   Widget build(BuildContext context) {
@@ -181,26 +182,32 @@ class _DrawPictureState extends State <DrawPicture> {
       onPanUpdate: (DragUpdateDetails details) {
         setState(() {
           RenderBox refereceBox = context.findRenderObject();
-          Offset localPosition = refereceBox.globalToLocal(details.globalPosition);
+          Offset localPosition =
+              refereceBox.globalToLocal(details.globalPosition);
           _points = List.from(_points)..add(localPosition);
         });
       },
-      onPanEnd: (DragEndDetails details)  => _points.add(null),
-      child: CustomPaint(painter: SignaturePainter(_points),size: Size.infinite,),
+      onPanEnd: (DragEndDetails details) => _points.add(null),
+      child: CustomPaint(
+        painter: SignaturePainter(_points),
+        size: Size.infinite,
+      ),
     );
   }
 }
+
 class CustomButton extends StatelessWidget {
   final String label;
   double _opacity = 1.0;
 
   CustomButton(this.label);
-  
-  @override 
-  Widget build(BuildContext context) {
-    return Opacity(opacity: 0.5, child: ElevatedButton(onPressed: () async {
 
-    }, child: Text(label)),) ;
+  @override
+  Widget build(BuildContext context) {
+    return Opacity(
+      opacity: 0.5,
+      child: ElevatedButton(onPressed: () async {}, child: Text(label)),
+    );
   }
 }
 
@@ -215,22 +222,26 @@ class _NetworkVCState extends State<NetworkVC> {
   void initState() {
     super.initState();
   }
-  
-  @override 
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('网络请求'),
       ),
-      body: ListView.builder(itemBuilder: (BuildContext context, int position){
-        return getRow(position);
-      },
-      itemCount: widgets.length,),
+      body: ListView.builder(
+        itemBuilder: (BuildContext context, int position) {
+          return getRow(position);
+        },
+        itemCount: widgets.length,
+      ),
     );
   }
 
   Widget getRow(int i) {
-    return Padding(padding: EdgeInsets.all(10),
-    child: Text("Row ${widgets[i]["title"]}"),);
+    return Padding(
+      padding: EdgeInsets.all(10),
+      child: Text("Row ${widgets[i]["title"]}"),
+    );
   }
 }
